@@ -16,6 +16,12 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
     enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/cosmo-cats
+          jwk-set-uri: http://localhost:8180/realms/cosmo-cats/protocol/openid-connect/certs
 
 server:
   port: 9090
@@ -36,3 +42,7 @@ features:
     new-pricing-algorithm: true
     enhanced-search: false
     premium-features: false
+
+logging:
+  level:
+    org.springframework.security: DEBUG
