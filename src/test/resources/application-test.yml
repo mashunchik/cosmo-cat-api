@@ -8,3 +8,9 @@ application:
   price-advisor-service:
     base-path: http://localhost:8089
     advisor: ${application.price-advisor-service.base-path}/api/v1/price-comparison
+
+feature:
+  cosmoCats:
+    enabled: false
+  kittyProducts:
+    enabled: false
