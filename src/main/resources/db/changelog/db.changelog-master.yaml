@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changes/001-initial-schema.yaml
+  - include:
+      file: db/changelog/changes/002-add-constraints.yaml
+  - include:
+      file: db/changelog/changes/004-add-api-keys.yaml

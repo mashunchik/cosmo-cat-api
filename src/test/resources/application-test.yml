@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: cosmo-cats-api
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+  liquibase:
+    enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/cosmo-cats
+          jwk-set-uri: http://localhost:9090/realms/cosmo-cats/protocol/openid-connect/certs
+
+wiremock:
+  server:
+    port: 9090
+
+logging:
+  level:
+    com.cosmo.cats: INFO

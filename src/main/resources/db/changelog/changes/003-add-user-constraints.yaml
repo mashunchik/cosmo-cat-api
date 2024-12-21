@@ -1,0 +1,82 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-users-table
+      author: cosmo-cats
+      changes:
+        - createSequence:
+            sequenceName: user_seq
+            incrementBy: 1
+            startValue: 1
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: user_seq
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(100)
+              - column:
+                  name: last_name
+                  type: varchar(100)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 002-add-user-constraints
+      author: cosmo-cats
+      changes:
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: email
+            constraintName: uk_user_email
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: username
+            constraintName: uk_user_username
+
+  - changeSet:
+      id: 003-add-user-indexes
+      author: cosmo-cats
+      changes:
+        - createIndex:
+            tableName: users
+            indexName: idx_user_email
+            columns:
+              - column:
+                  name: email
+        - createIndex:
+            tableName: users
+            indexName: idx_user_username
+            columns:
+              - column:
+                  name: username

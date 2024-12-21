@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: cosmo-cats-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cosmo_cats
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/cosmo-cats
+          jwk-set-uri: http://localhost:8180/realms/cosmo-cats/protocol/openid-connect/certs
+
+server:
+  port: 9090
+
+application:
+  rest-client:
+    response-timeout: 1000
+  price-advisor-service:
+    base-path: http://localhost:8089
+    advisor: ${application.price-advisor-service.base-path}/api/v1/price-comparison
+
+features:
+  cosmoCats:
+    enabled: true
+  kittyProducts:
+    enabled: false
+  enabled:
+    new-pricing-algorithm: true
+    enhanced-search: false
+    premium-features: false
+
+logging:
+  level:
+    org.springframework.security: DEBUG
