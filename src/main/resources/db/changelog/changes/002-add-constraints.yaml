@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-add-unique-constraints
+      author: cosmo-cats
+      changes:
+        - addUniqueConstraint:
+            tableName: products
+            columnNames: category_id, name
+            constraintName: uk_product_name_per_category
+
+  - changeSet:
+      id: 002-add-indexes
+      author: cosmo-cats
+      changes:
+        - createIndex:
+            tableName: products
+            indexName: idx_product_name
+            columns:
+              - column:
+                  name: name
+        - createIndex:
+            tableName: products
+            indexName: idx_product_category
+            columns:
+              - column:
+                  name: category_id
+        - createIndex:
+            tableName: orders
+            indexName: idx_order_status
+            columns:
+              - column:
+                  name: status
+        - createIndex:
+            tableName: orders
+            indexName: idx_order_customer_email
+            columns:
+              - column:
+                  name: customer_email
