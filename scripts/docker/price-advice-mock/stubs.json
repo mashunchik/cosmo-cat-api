@@ -1,0 +1,15 @@
+[
+  {
+    "request": {
+      "method": "GET",
+      "urlPathPattern": "/market-data/v1/specimen/.*"
+    },
+    "response": {
+      "status": 200,
+      "body": "{ \"specimenId\": \"{{request.pathSegments[2]}}\", \"regionalPrices\": { \"ALPHA_QUADRANT\": 999.99, \"BETA_QUADRANT\": 1099.99 }, \"averagePrice\": 1049.99, \"marketTrend\": \"RISING\" }",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
+]
